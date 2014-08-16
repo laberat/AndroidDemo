@@ -39,10 +39,10 @@ public class PersonAdapter extends BaseAdapter {
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-		PersonHolder holder = null;
+		ViewHolder holder = null;
 		if (convertView == null) {
 			convertView = LayoutInflater.from(mContext).inflate(R.layout.listitem_personlist, null);
-			holder = new PersonHolder();
+			holder = new ViewHolder();
 			
 			holder.personName = (TextView) convertView.findViewById(R.id.textview_personlist_listitem_name);
 			holder.personAge = (TextView) convertView.findViewById(R.id.textview_personlist_listitem_age);
@@ -50,7 +50,7 @@ public class PersonAdapter extends BaseAdapter {
 			
 			convertView.setTag(holder);
 		} else {
-			holder = (PersonHolder) convertView.getTag();
+			holder = (ViewHolder) convertView.getTag();
 		}
 		
 		Person person = mList.get(position);
@@ -61,7 +61,7 @@ public class PersonAdapter extends BaseAdapter {
 		return convertView;
 	}
 	
-	static class PersonHolder{
+	static class ViewHolder{
 		TextView personName;
 		TextView personAge;
 		TextView personSex;

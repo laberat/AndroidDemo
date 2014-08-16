@@ -1,6 +1,7 @@
 package com.yyc.androiddemo.activity;
 
 import com.yyc.androiddemo.R;
+import com.yyc.androiddemo.bean.Person;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -18,19 +19,11 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		System.out.println("first create project");
-		//test
 		
-		
-
 		initView();
-		initListener();
 	}
-
 	private void initView() {
 		btnStartPersonList = (Button) findViewById(R.id.btn_main_start_personlist);
-	}
-
-	private void initListener() {
 		btnStartPersonList.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -39,6 +32,4 @@ public class MainActivity extends Activity {
 			}
 		});
 	}
-	
-
 }

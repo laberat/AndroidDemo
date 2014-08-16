@@ -5,6 +5,10 @@ public class Person {
 	private String name;
 	private int age;
 	private int sex;//1 for male, 0 for female
+	
+	public Person(){
+		//空的构造函数
+	}
 	public Person(String name, int age, int sex) {
 		this.name = name;
 		this.age = age;

@@ -31,7 +31,7 @@ public class PersonListActivity extends Activity {
 	private void initList() {
 		mList = new ArrayList<Person>();
 		for(int i=0;i<40;i++){
-			Person p = new Person("ÒÂÔÆ³Û", 20, 1);
+			Person p = new Person("è¡£äº‘é©°", 20, 1);
 			mList.add(p);
 		}
 	}
