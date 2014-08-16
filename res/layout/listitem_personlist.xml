@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+    
+    <TextView 
+        android:id="@+id/textview_personlist_listitem_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/personlist_listitem_name"/>
+    <TextView 
+        android:id="@+id/textview_personlist_listitem_age"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/personlist_listitem_age"/>
+    <TextView 
+        android:id="@+id/textview_personlist_listitem_sex"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/personlist_listitem_sex"/>
+
+</LinearLayout>
