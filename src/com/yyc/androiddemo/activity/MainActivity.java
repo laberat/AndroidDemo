@@ -1,4 +1,6 @@
-package com.yyc.androiddemo;
+package com.yyc.androiddemo.activity;
+
+import com.yyc.androiddemo.R;
 
 import android.app.Activity;
 import android.content.Intent;
