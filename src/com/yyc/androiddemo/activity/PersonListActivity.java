@@ -16,6 +16,7 @@ public class PersonListActivity extends Activity {
 	private ListView mListView;
 	private List<Person> mList;
 	private PersonAdapter mAdapter;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
