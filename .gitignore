@@ -1,0 +1,11 @@
+ettings
+bin
+.classpath
+.project
+gen
+# other
+.project.bak
+channel-list.txt
+dist.py
+local.properties
+
