@@ -19,6 +19,8 @@ public class MainActivity extends Activity {
 		setContentView(R.layout.activity_main);
 		System.out.println("first create project");
 		//test
+		
+		
 
 		initView();
 		initListener();
