@@ -2,13 +2,15 @@
 <resources>
 
     <string name="app_name">AndroidDemo</string>
-    <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="btn_main_start_personlist">Start PersonList</string>
+    <string name="btn_main_start_locationlist">Start Locationlist</string>
     
     <string name="personlist_listitem_name"></string>
     <string name="personlist_listitem_age"></string>
     <string name="personlist_listitem_sex"></string>
     
+    <string name="locationlist_listitem_title">title</string>
+    <string name="locationlist_listitem_description">description</string>
 
 </resources>

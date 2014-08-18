@@ -12,6 +12,7 @@ import android.widget.Button;
 public class MainActivity extends Activity {
 	
 	private Button btnStartPersonList;
+	private Button btnStartLocationList;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -28,5 +29,15 @@ public class MainActivity extends Activity {
 				startActivity(intent);
 			}
 		});
+		
+		btnStartLocationList = (Button) findViewById(R.id.btn_main_start_locationlist);
+		btnStartLocationList.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(MainActivity.this, LocationListActivity.class);
+				startActivity(intent);
+			}
+		});
+		
 	}
 }

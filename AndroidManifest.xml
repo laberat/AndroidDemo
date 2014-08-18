@@ -23,6 +23,7 @@
             </intent-filter>
         </activity>
         <activity android:name="com.yyc.androiddemo.activity.PersonListActivity"></activity>
+        <activity android:name="com.yyc.androiddemo.activity.LocationListActivity"></activity>
     </application>
 
 </manifest>
