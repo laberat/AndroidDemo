@@ -12,12 +12,12 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
 public class HttpDownloaderUtil {
-	public static InputStream httpDownload(String url){//本方法使用GET获取inputstream，POST方法暂时还没有写
+	public static InputStream httpDownload(String url) {// 鏈柟娉曚娇鐢℅ET鑾峰彇inputstream锛孭OST鏂规硶鏆傛椂杩樻病鏈夊啓
 		URL mUrl = null;
 		InputStream is = null;
 		HttpURLConnection connection = null;
 		int attempt = 0;
-		
+
 		try {
 			mUrl = new URL(url);
 		} catch (MalformedURLException e1) {
@@ -52,7 +52,7 @@ public class HttpDownloaderUtil {
 		} while (attempt < 3);
 		return is;
 	}
-	
+
 	public static String getJSON(String url) {
 		String resultString = "";
 		String thisLine = null;

@@ -18,12 +18,12 @@ public class LocationAdapter extends BaseAdapter {
 
 	private Context mContext;
 	private List<Location> mList;
-	
-	public LocationAdapter(Context context, List<Location> list){
+
+	public LocationAdapter(Context context, List<Location> list) {
 		this.mContext = context;
 		this.mList = list;
 	}
-	
+
 	@Override
 	public int getCount() {
 		return this.mList.size();
@@ -43,38 +43,43 @@ public class LocationAdapter extends BaseAdapter {
 	public View getView(int position, View convertView, ViewGroup parent) {
 		ViewHolder holder = null;
 		if (convertView == null) {
-			convertView = LayoutInflater.from(mContext).inflate(R.layout.listitem_locationlist, null);
+			convertView = LayoutInflater.from(mContext).inflate(
+					R.layout.listitem_locationlist, null);
 			holder = new ViewHolder();
-			
-			holder.locationTitle = (TextView) convertView.findViewById(R.id.textview_locationlist_listitem_title);
-			holder.locationDescription = (TextView) convertView.findViewById(R.id.textview_locationlist_listitem_description);
-			holder.locationPic =  (ImageLoader) convertView.findViewById(R.id.imageview_locationlist_listitem_pic);
-			
+
+			holder.locationTitle = (TextView) convertView
+					.findViewById(R.id.textview_locationlist_listitem_title);
+			holder.locationDescription = (TextView) convertView
+					.findViewById(R.id.textview_locationlist_listitem_description);
+			holder.locationPic = (ImageLoader) convertView
+					.findViewById(R.id.imageview_locationlist_listitem_pic);
+
 			convertView.setTag(holder);
 		} else {
 			holder = (ViewHolder) convertView.getTag();
 		}
-		
+
 		Location location = mList.get(position);
-		//����ͼƬ
-		holder.locationTitle.setText("Title: "+location.getTitle());
-		holder.locationDescription.setText("Description: "+location.getDescription());
-		holder.locationPic.setUrl(location.getPicURL());
-		
+		// 下载图片
+		holder.locationTitle.setText("Title: " + location.getTitle());
+		holder.locationDescription.setText("Description: "
+				+ location.getDescription());
+		holder.locationPic.setUrl(location.getPicURL());// 使用自定义View的setUrl方法
+
 		return convertView;
 	}
-	
-	static class ViewHolder{
+
+	static class ViewHolder {
 		TextView locationTitle;
 		TextView locationDescription;
 		ImageLoader locationPic;
 	}
 
-	public void setNetImage(Bitmap bitmap, int position){
-		
+	public void setNetImage(Bitmap bitmap, int position) {
+
 	}
-	
-	public void addAll(List<Location> list){
+
+	public void addAll(List<Location> list) {
 		this.mList.addAll(list);
 		this.notifyDataSetChanged();
 	}

@@ -1,3 +1,7 @@
 eclipse.preferences.version=1
+encoding//src/com/yyc/androiddemo/activity/LocationListActivity.java=UTF-8
 encoding//src/com/yyc/androiddemo/activity/MainActivity.java=UTF-8
 encoding//src/com/yyc/androiddemo/activity/PersonListActivity.java=UTF-8
+encoding//src/com/yyc/androiddemo/adapter/LocationAdapter.java=UTF-8
+encoding//src/com/yyc/androiddemo/bean/Person.java=UTF-8
+encoding//src/com/yyc/androiddemo/util/HttpDownloaderUtil.java=UTF-8

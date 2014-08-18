@@ -10,7 +10,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 
 public class MainActivity extends Activity {
-	
+
 	private Button btnStartPersonList;
 	private Button btnStartLocationList;
 
@@ -20,24 +20,27 @@ public class MainActivity extends Activity {
 		setContentView(R.layout.activity_main);
 		initView();
 	}
+
 	private void initView() {
 		btnStartPersonList = (Button) findViewById(R.id.btn_main_start_personlist);
 		btnStartPersonList.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent(MainActivity.this, PersonListActivity.class);
+				Intent intent = new Intent(MainActivity.this,
+						PersonListActivity.class);
 				startActivity(intent);
 			}
 		});
-		
+
 		btnStartLocationList = (Button) findViewById(R.id.btn_main_start_locationlist);
 		btnStartLocationList.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent(MainActivity.this, LocationListActivity.class);
+				Intent intent = new Intent(MainActivity.this,
+						LocationListActivity.class);
 				startActivity(intent);
 			}
 		});
-		
+
 	}
 }

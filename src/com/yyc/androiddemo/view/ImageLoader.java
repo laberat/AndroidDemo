@@ -21,26 +21,21 @@ public class ImageLoader extends ImageView {
 	public ImageLoader(Context context) {
 		super(context);
 	}
-	
-	
-	public void setUrl(final String urlString){
-		new Thread( new Runnable() {
-			
+
+	public void setUrl(final String urlString) {
+		new Thread(new Runnable() {
+
 			@Override
 			public void run() {
 				Log.e("TAG", "....");
 				final Bitmap bitmap = HttpDownloaderUtil.getBitmap(urlString);
 				ImageLoader.this.post(new Runnable() {
-					
 					@Override
 					public void run() {
 						ImageLoader.this.setImageBitmap(bitmap);
 					}
 				});
-			  
 			}
 		}).start();
-
 	}
-
 }

@@ -26,61 +26,63 @@ public class LocationListActivity extends Activity {
 	private String jsonString01;
 	private String jsonString02;
 	private LocationDao locationDao;
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_locationlist);
-		
+
 		initView();
 		mList = new ArrayList<Location>();
 		locationDao = new LocationDao(this);
-		
-//		httpdownloadLocation();
-		mList = locationDao.getAll();//µ±Ê¹ÓÃ¶ÁÈ¡SQLiteÀ´»ñÈ¡ListViewµÄÊ±ºò£¬Ê¹ÓÃÕâÌõÓï¾ä
-		
+
+		// httpdownloadLocation();
+		mList = locationDao.getAll();// å½“ä½¿ç”¨SQLiteæ¥è·å–ListViewçš„æ—¶å€™ï¼Œä½¿ç”¨è¿™æ¡è¯­å¥
+
 		mAdapter = new LocationAdapter(this, mList);
 		mListView.setAdapter(mAdapter);
 	}
-	
+
 	private void initView() {
 		mListView = (ListView) findViewById(R.id.listview_locationlist);
 	}
-	
+
 	/**
-	 * µ±Ê¹ÓÃÏÂÔØjson²¢½âÎöÀ´»ñÈ¡ListViewµÄÊ±ºò£¬Ê¹ÓÃ¸Ã·½·¨
+	 * å½“ä½¿ç”¨ä¸‹è½½jsonå¹¶è§£æçš„æ–¹å¼æ¥è·å–ListViewçš„æ—¶å€™ï¼Œè°ƒç”¨è¯¥æ–¹æ³•
 	 */
 	private void httpdownloadLocation() {
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
-				//ĞÂÏß³Ì»ñµÃLocationÁĞ±í
 				jsonString01 = HttpDownloaderUtil.getJSON(Json_Url01);
 				jsonString02 = HttpDownloaderUtil.getJSON(Json_url02);
-				
-				Message msg = Message.obtain();//prefer Message.obtain(), not new Message()
-				msg.what = 1;//locationÁĞ±í»ñÈ¡Íê³É
+
+				Message msg = Message.obtain();// prefer Message.obtain(), not
+												// new Message()
+				msg.what = 1;// locationè·å–å®Œæˆ
 				mHandler.sendMessage(msg);
 			}
 		}).start();
 	}
 
 	/**
-	 * µ±Ê¹ÓÃÏÂÔØjson²¢½âÎöÀ´»ñÈ¡ListViewµÄÊ±ºò£¬ÅäºÏhttpdownloadLocation()Ê¹ÓÃ¸Ã·½·¨
+	 * å½“ä½¿ç”¨ä¸‹è½½jsonå¹¶è§£æçš„æ–¹å¼æ¥è·å–ListViewçš„æ—¶å€™ï¼Œé…åˆhttpdownloadLocation()è°ƒç”¨è¯¥æ–¹æ³•
 	 */
-	private Handler mHandler = new Handler(){
+	private Handler mHandler = new Handler() {
 		@Override
 		public void handleMessage(Message msg) {
 			switch (msg.what) {
-			case 1:
-				List<Location> list = JSONParserUtil.getLocationsFromJSON(jsonString01);
-				List<Location> list2 = JSONParserUtil.getLocationsFromJSON(jsonString02);
+			case 1:// locationè·å–å®Œæˆ
+				List<Location> list = JSONParserUtil
+						.getLocationsFromJSON(jsonString01);
+				List<Location> list2 = JSONParserUtil
+						.getLocationsFromJSON(jsonString02);
 				list.addAll(list2);
 
 				for (int i = 0; i < list.size(); i++) {
 					locationDao.insertLocation(list.get(i));
-				}
-				
+				}// è¿™æ¡è¯­å¥ç”¨æ¥æŠŠhttpä¸‹è½½å†…å®¹åˆ†æä¹‹åæ’å…¥æ•°æ®åº“
+
 				mAdapter.addAll(list);
 				break;
 			default:
