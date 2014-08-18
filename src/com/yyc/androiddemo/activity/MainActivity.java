@@ -1,7 +1,6 @@
 package com.yyc.androiddemo.activity;
 
 import com.yyc.androiddemo.R;
-import com.yyc.androiddemo.bean.Person;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -18,8 +17,6 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		System.out.println("first create project");
-		
 		initView();
 	}
 	private void initView() {
