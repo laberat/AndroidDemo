@@ -27,6 +27,7 @@
         </activity>
         <activity android:name="com.yyc.androiddemo.activity.PersonListActivity"></activity>
         <activity android:name="com.yyc.androiddemo.activity.LocationListActivity"></activity>
+        <activity android:name="com.yyc.androiddemo.activity.BasicAnimationActivity"></activity>
     </application>
 
 </manifest>

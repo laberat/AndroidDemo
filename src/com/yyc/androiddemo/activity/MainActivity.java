@@ -13,6 +13,7 @@ public class MainActivity extends Activity {
 
 	private Button btnStartPersonList;
 	private Button btnStartLocationList;
+	private Button btnStartBasicAnim;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +39,16 @@ public class MainActivity extends Activity {
 			public void onClick(View v) {
 				Intent intent = new Intent(MainActivity.this,
 						LocationListActivity.class);
+				startActivity(intent);
+			}
+		});
+		
+		btnStartBasicAnim = (Button) findViewById(R.id.btn_main_start_basicanim);
+		btnStartBasicAnim.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(MainActivity.this,
+						BasicAnimationActivity.class);
 				startActivity(intent);
 			}
 		});

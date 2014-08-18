@@ -5,6 +5,7 @@
     <string name="action_settings">Settings</string>
     <string name="btn_main_start_personlist">Start PersonList</string>
     <string name="btn_main_start_locationlist">Start Locationlist</string>
+    <string name="btn_main_start_basicanim">Start BasicAnim</string>
     
     <string name="personlist_listitem_name"></string>
     <string name="personlist_listitem_age"></string>
@@ -12,5 +13,13 @@
     
     <string name="locationlist_listitem_title">title</string>
     <string name="locationlist_listitem_description">description</string>
+    
+    <string name="btn_basicanim_X_move">X轴平移</string>
+    <string name="btn_basicanim_Y_move">Y轴平移</string>
+    <string name="btn_basicanim_X_rotate">X轴旋转</string>
+    <string name="btn_basicanim_Y_rotate">Y轴旋转</string>
+    <string name="btn_basicanim_X_scale">X轴缩放</string>
+    <string name="btn_basicanim_Y_scale">Y轴缩放</string>
+    
 
 </resources>
