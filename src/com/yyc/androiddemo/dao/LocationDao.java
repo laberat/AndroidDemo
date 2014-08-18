@@ -21,9 +21,6 @@ public class LocationDao {
 		this.mHelper = new LocationDBhelper(mContext, DB_NAME);
 	}
 	
-	public void initLocation(){
-		
-	}
 	public long insertLocation(Location location){
 		ContentValues cv = new ContentValues();
 		SQLiteDatabase db = this.mHelper.getWritableDatabase();
