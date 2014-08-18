@@ -12,6 +12,7 @@ import android.widget.ListView;
 import com.yyc.androiddemo.R;
 import com.yyc.androiddemo.adapter.LocationAdapter;
 import com.yyc.androiddemo.bean.Location;
+import com.yyc.androiddemo.dao.LocationDao;
 import com.yyc.androiddemo.util.HttpDownloaderUtil;
 import com.yyc.androiddemo.util.JSONParserUtil;
 
@@ -24,6 +25,7 @@ public class LocationListActivity extends Activity {
 	private LocationAdapter mAdapter;
 	private String jsonString01;
 	private String jsonString02;
+	private LocationDao locationDao;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +34,23 @@ public class LocationListActivity extends Activity {
 		
 		initView();
 		mList = new ArrayList<Location>();
+		locationDao = new LocationDao(this);
 		
+//		httpdownloadLocation();
+		mList = locationDao.getAll();//当使用读取SQLite来获取ListView的时候，使用这条语句
+		
+		mAdapter = new LocationAdapter(this, mList);
+		mListView.setAdapter(mAdapter);
+	}
+	
+	private void initView() {
+		mListView = (ListView) findViewById(R.id.listview_locationlist);
+	}
+	
+	/**
+	 * 当使用下载json并解析来获取ListView的时候，使用该方法
+	 */
+	private void httpdownloadLocation() {
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
@@ -45,15 +63,11 @@ public class LocationListActivity extends Activity {
 				mHandler.sendMessage(msg);
 			}
 		}).start();
-		
-		mAdapter = new LocationAdapter(this, mList);
-		mListView.setAdapter(mAdapter);
-	}	
-	
-	private void initView() {
-		mListView = (ListView) findViewById(R.id.listview_locationlist);
 	}
-	
+
+	/**
+	 * 当使用下载json并解析来获取ListView的时候，配合httpdownloadLocation()使用该方法
+	 */
 	private Handler mHandler = new Handler(){
 		@Override
 		public void handleMessage(Message msg) {
@@ -62,6 +76,11 @@ public class LocationListActivity extends Activity {
 				List<Location> list = JSONParserUtil.getLocationsFromJSON(jsonString01);
 				List<Location> list2 = JSONParserUtil.getLocationsFromJSON(jsonString02);
 				list.addAll(list2);
+
+				for (int i = 0; i < list.size(); i++) {
+					locationDao.insertLocation(list.get(i));
+				}
+				
 				mAdapter.addAll(list);
 				break;
 			default:

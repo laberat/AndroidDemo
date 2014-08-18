@@ -16,7 +16,7 @@ public class LocationDBhelper extends SQLiteOpenHelper {
 	public static final String sql = "create table " + TABLE_NAME +"("
 			+ title + " varchar(20)," 
 			+ description + " varchar(200),"
-			+ picURL + " varchar(100),";
+			+ picURL + " varchar(100))";
 
 	public LocationDBhelper(Context context, String name,
 			CursorFactory factory, int version) {
