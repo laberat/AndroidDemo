@@ -12,11 +12,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.yyc.androiddemo.R;
-import com.yyc.androiddemo.activity.LocationListActivity;
-import com.yyc.androiddemo.adapter.PersonAdapter.ViewHolder;
 import com.yyc.androiddemo.bean.Location;
-import com.yyc.androiddemo.bean.Person;
-import com.yyc.androiddemo.util.HttpDownloaderUtil;
+import com.yyc.androiddemo.view.ImageLoader;
 
 public class LocationAdapter extends BaseAdapter {
 
@@ -52,7 +49,7 @@ public class LocationAdapter extends BaseAdapter {
 			
 			holder.locationTitle = (TextView) convertView.findViewById(R.id.textview_locationlist_listitem_title);
 			holder.locationDescription = (TextView) convertView.findViewById(R.id.textview_locationlist_listitem_description);
-			holder.locationPic =  (ImageView) convertView.findViewById(R.id.imageview_locationlist_listitem_pic);
+			holder.locationPic =  (ImageLoader) convertView.findViewById(R.id.imageview_locationlist_listitem_pic);
 			
 			convertView.setTag(holder);
 		} else {
@@ -61,9 +58,9 @@ public class LocationAdapter extends BaseAdapter {
 		
 		Location location = mList.get(position);
 		//œ¬‘ÿÕº∆¨
-		holder.locationTitle.setText("Name is : "+location.getTitle());
-		holder.locationDescription.setText("Age is : "+location.getDescription());
-		holder.locationPic.setImageResource(R.drawable.imageview_default);
+		holder.locationTitle.setText("Title: "+location.getTitle());
+		holder.locationDescription.setText("Description: "+location.getDescription());
+		holder.locationPic.setUrl(location.getPicURL());
 		
 		return convertView;
 	}
@@ -71,7 +68,15 @@ public class LocationAdapter extends BaseAdapter {
 	static class ViewHolder{
 		TextView locationTitle;
 		TextView locationDescription;
-		ImageView locationPic;
+		ImageLoader locationPic;
 	}
 
+	public void setNetImage(Bitmap bitmap, int position){
+		
+	}
+	
+	public void addAll(List<Location> list){
+		this.mList.addAll(list);
+		this.notifyDataSetChanged();
+	}
 }
