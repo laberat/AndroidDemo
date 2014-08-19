@@ -1,14 +1,16 @@
 package com.yyc.androiddemo.activity;
 
-import com.yyc.androiddemo.R;
-
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.view.animation.RotateAnimation;
 import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 import android.widget.ImageView;
+
+import com.yyc.androiddemo.R;
 
 public class BasicAnimationActivity extends Activity {
 
@@ -18,12 +20,12 @@ public class BasicAnimationActivity extends Activity {
 	private Button btnYRotate;
 	private Button btnXScale;
 	private Button btnYScale;
-	
+
 	private Animation mAnimMove;
 	private Animation mAnimRotate;
 	private Animation mAnimScale;
 	private ImageView mImageView;
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -39,13 +41,55 @@ public class BasicAnimationActivity extends Activity {
 		btnXScale = (Button) findViewById(R.id.btn_basicanim_X_scale);
 		btnYScale = (Button) findViewById(R.id.btn_basicanim_Y_scale);
 		mImageView = (ImageView) findViewById(R.id.imageview_basicanim_display);
-		
+
+		// ***************** 平移 ************************
 		btnXMove.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				mAnimMove = new TranslateAnimation(10, 100, 10, 100);
+				mAnimMove = new TranslateAnimation(Animation.RELATIVE_TO_SELF,
+						0, Animation.RELATIVE_TO_SELF, 1,
+						Animation.RELATIVE_TO_SELF, 0,
+						Animation.RELATIVE_TO_SELF, 0);
 				mAnimMove.setDuration(3000);
-				BasicAnimationActivity.this.mImageView.startAnimation(mAnimMove);
+				mAnimMove.setFillAfter(true);
+				// ↑ 设置image平移完成之后留在那里，不回到原处; 但是事实上那个位置并不能设置监听
+				mAnimMove.setRepeatCount(Animation.INFINITE);
+				// ↑ 设置无限次重复动画，当其他button被点击时，事件会停止；
+				// ↑ 因为是无限次，因此上一个方法被覆盖掉了
+				mAnimMove.setRepeatMode(Animation.REVERSE);
+				BasicAnimationActivity.this.mImageView
+						.startAnimation(mAnimMove);
+			}
+		});
+
+		btnYMove.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View arg0) {
+				mAnimMove = AnimationUtils.loadAnimation(
+						BasicAnimationActivity.this, R.anim.basic_move_y);
+				// mAnimMove.setRepeatCount(Animation.INFINITE);
+				// mAnimMove.setRepeatMode(Animation.REVERSE);
+				// ↑ 可以实现往复，但是如果本身没碰到墙壁，则该设置无效 -------这句话错了
+				// ↑ 应该是如果没设置repeatCount，上句就会无效
+				// ↑ 既然使用了XML定义动画，直接在XML中设置重复和往复就好了，不清楚为什么混合使用会失效
+
+				BasicAnimationActivity.this.mImageView
+						.startAnimation(mAnimMove);
+			}
+		});
+
+		// ***************** 旋转 ************************
+		btnXRotate.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				mAnimRotate = new RotateAnimation(0, 90,
+						Animation.RELATIVE_TO_SELF, 0,
+						Animation.RELATIVE_TO_SELF, 1);
+				//0.5 0.5是沿着中心点旋转
+				//0 1就是沿着横坐标0，纵坐标100%，也就是左下角的点旋转
+				mAnimRotate.setDuration(10000);
+				BasicAnimationActivity.this.mImageView
+				.startAnimation(mAnimRotate);
 			}
 		});
 	}
