@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.animation.RotateAnimation;
+import android.view.animation.ScaleAnimation;
 import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -85,11 +86,47 @@ public class BasicAnimationActivity extends Activity {
 				mAnimRotate = new RotateAnimation(0, 90,
 						Animation.RELATIVE_TO_SELF, 0,
 						Animation.RELATIVE_TO_SELF, 1);
-				//0.5 0.5是沿着中心点旋转
-				//0 1就是沿着横坐标0，纵坐标100%，也就是左下角的点旋转
+				// 0.5 0.5是沿着中心点旋转
+				// 0 1就是沿着横坐标0，纵坐标100%，也就是左下角的点旋转
 				mAnimRotate.setDuration(10000);
 				BasicAnimationActivity.this.mImageView
-				.startAnimation(mAnimRotate);
+						.startAnimation(mAnimRotate);
+			}
+		});
+
+		btnYRotate.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				mAnimRotate = AnimationUtils.loadAnimation(
+						BasicAnimationActivity.this, R.anim.basic_rotate_y);
+				BasicAnimationActivity.this.mImageView
+						.startAnimation(mAnimRotate);
+			}
+		});
+
+		// ***************** 缩放 ************************
+		btnXScale.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				mAnimScale = new ScaleAnimation(1, 2, 1, 0,
+						Animation.RELATIVE_TO_SELF, 1,
+						Animation.RELATIVE_TO_SELF, 1);
+				// ↑ 如此设置会以1,1（即右下角顶点）为基点，X方向放大到两倍（向另一个定点方向放大），Y方向缩小到0（向本顶点方向缩小）
+				// 最后会变成一条线，消失
+				mAnimScale.setDuration(5000);
+				mAnimScale.setFillAfter(true);
+				BasicAnimationActivity.this.mImageView
+						.startAnimation(mAnimScale);
+			}
+		});
+
+		btnYScale.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				mAnimScale = AnimationUtils.loadAnimation(
+						BasicAnimationActivity.this, R.anim.basic_scale_y);
+				BasicAnimationActivity.this.mImageView
+						.startAnimation(mAnimScale);
 			}
 		});
 	}
