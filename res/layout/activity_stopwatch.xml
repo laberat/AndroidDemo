@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+    <LinearLayout 
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:background="@android:color/darker_gray"
+        android:gravity="center" >
+	<TextView 
+	    android:id="@+id/textview_stopwatch_minute"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:textSize="25sp"
+	    android:text="00"/>
+	<TextView 
+	    android:id="@+id/textview_stopwatch_colon"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:textSize="25sp"
+	    android:text=" : "/>
+	<TextView 
+	    android:id="@+id/textview_stopwatch_second"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:textSize="25sp"
+	    android:text="00"/>
+	<TextView 
+	    android:id="@+id/textview_stopwatch_colon"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:textSize="25sp"
+	    android:text=" : "/>
+	<TextView 
+	    android:id="@+id/textview_stopwatch_centisecond"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:textSize="25sp"
+	    android:text="00"/>
+	</LinearLayout>
+	
+    <LinearLayout 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+        <Button 
+            android:id="@+id/btn_stopwatch_startorpause"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/btn_stopwatch_start"/>
+        <Button 
+            android:id="@+id/btn_stopwatch_resetorcount"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/btn_stopwatch_reset"/>
+    </LinearLayout>
+    
+    <ListView 
+        android:id="@+id/listview_stopwatch"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:divider="@android:color/black"
+        android:dividerHeight="2dp"
+        android:layout_marginTop="10dp"
+        android:background="@android:color/darker_gray"
+        />
+</LinearLayout>

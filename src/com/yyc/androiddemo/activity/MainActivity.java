@@ -14,6 +14,7 @@ public class MainActivity extends Activity {
 	private Button btnStartPersonList;
 	private Button btnStartLocationList;
 	private Button btnStartBasicAnim;
+	private Button btnStartStopWatch;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +50,16 @@ public class MainActivity extends Activity {
 			public void onClick(View v) {
 				Intent intent = new Intent(MainActivity.this,
 						BasicAnimationActivity.class);
+				startActivity(intent);
+			}
+		});
+		
+		btnStartStopWatch = (Button) findViewById(R.id.btn_main_start_stopwatch);
+		btnStartStopWatch.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(MainActivity.this,
+						StopWatchActivity.class);
 				startActivity(intent);
 			}
 		});
