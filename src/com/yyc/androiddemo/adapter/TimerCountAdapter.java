@@ -1,23 +1,24 @@
 package com.yyc.androiddemo.adapter;
 
-import java.util.Collections;
 import java.util.List;
 
-import com.yyc.androiddemo.R;
-import com.yyc.androiddemo.bean.TimerCount;
-
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.yyc.androiddemo.R;
+import com.yyc.androiddemo.bean.TimerCount;
+import com.yyc.androiddemo.util.StringUtil;
+
 public class TimerCountAdapter extends BaseAdapter {
 
 	private Context mContext;
 	private List<TimerCount> mList;
-	
+
 	public TimerCountAdapter(Context mContext, List<TimerCount> mList) {
 		super();
 		this.mContext = mContext;
@@ -46,7 +47,6 @@ public class TimerCountAdapter extends BaseAdapter {
 			holder = new ViewHolder();
 			convertView = LayoutInflater.from(mContext).inflate(
 					R.layout.listitem_stopwatch, null);
-
 			holder.count = (TextView) convertView
 					.findViewById(R.id.textview_stopwatch_listitem_count);
 			holder.timerMin = (TextView) convertView
@@ -57,20 +57,21 @@ public class TimerCountAdapter extends BaseAdapter {
 					.findViewById(R.id.textview_stopwatch_listitem_centisecond);
 			holder.timerDiffer = (TextView) convertView
 					.findViewById(R.id.textview_stopwatch_listitem_passtime);
-
 			convertView.setTag(holder);
 		} else {
 			holder = (ViewHolder) convertView.getTag();
 		}
-
 		TimerCount timerCount = mList.get(position);
-
-		holder.count.setText("第 "+timerCount.getCount()+" 计次");
-		holder.timerMin.setText(""+timerCount.getTimerMin());//int 转为 string
-		holder.timerSec.setText(""+timerCount.getTimerSec());
-		holder.timerCentiSec.setText(""+timerCount.getTimerCentiSec());
-		holder.timerDiffer.setText("+"+timerCount.getTimerDiffer()+" s/100");
-
+		holder.count.setText("第 "
+				+ StringUtil.formatUnderTen(timerCount.getCount()) + " 计次");
+		holder.timerMin.setText(""
+				+ StringUtil.formatUnderTen(timerCount.getTimerMin()));
+		holder.timerSec.setText(""
+				+ StringUtil.formatUnderTen(timerCount.getTimerSec()));
+		holder.timerCentiSec.setText(""
+				+ StringUtil.formatUnderTen(timerCount.getTimerCentiSec()));
+		holder.timerDiffer
+				.setText("+" + timerCount.getTimerDiffer() + " s/100");
 		return convertView;
 	}
 
@@ -81,9 +82,15 @@ public class TimerCountAdapter extends BaseAdapter {
 		TextView timerCentiSec;
 		TextView timerDiffer;
 	}
-	
-	public void insert(TimerCount timerCount){
+
+	public void insert(TimerCount timerCount) {
 		this.mList.add(0, timerCount);
+		this.notifyDataSetChanged();
+	}
+
+	public void clear() {
+		this.mList.clear();
+		Log.i("TAG", this.mList.size()+"");
 		this.notifyDataSetChanged();
 	}
 
