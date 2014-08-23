@@ -1,5 +1,7 @@
 package com.yyc.androiddemo.bean;
 
+import com.yyc.androiddemo.util.StringUtil;
+
 /**
  * TimerCount类，每个实例对应于一个表示分开计时的条目，包含计次数，计次时间，于上次计次相差时间（单位是百分之一秒）
  * 
@@ -64,8 +66,8 @@ public class TimerCount {
 	}
 
 	public String toString() {
-		return "第" + this.count + "次分时计次——————" + this.timerMin + " : "
-				+ this.timerSec + " : " + this.timerCentiSec + "————  +"+this.timerDiffer;
+		return "第" + this.count + "次分时计次——————" + StringUtil.formatUnderTen(this.timerMin) + " : "
+				+ StringUtil.formatUnderTen(this.timerSec) + " : " + StringUtil.formatUnderTen(this.timerCentiSec) + "————  +"+this.timerDiffer;
 	}
 
 }

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.yyc.androiddemo.bean.Location;
+import com.yyc.androiddemo.constant.Constant;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -14,11 +15,10 @@ import android.util.Log;
 public class LocationDao {
 	private LocationDBhelper mHelper;
 	private Context mContext;
-	public static final String DB_NAME = "AndroidDemo";
-
+	
 	public LocationDao(Context context) {
 		this.mContext = context;
-		this.mHelper = new LocationDBhelper(mContext, DB_NAME);
+		this.mHelper = new LocationDBhelper(mContext, Constant.DB_NAME);
 	}
 
 	public long insertLocation(Location location) {

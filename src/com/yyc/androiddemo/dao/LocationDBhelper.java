@@ -1,5 +1,7 @@
 package com.yyc.androiddemo.dao;
 
+import com.yyc.androiddemo.constant.Constant;
+
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteDatabase.CursorFactory;
@@ -8,7 +10,6 @@ import android.util.Log;
 
 public class LocationDBhelper extends SQLiteOpenHelper {
 
-	public static final int DEFAULT_VERSION = 1;
 	public static final String title = "title";
 	public static final String description = "description";
 	public static final String picURL = "url";
@@ -27,7 +28,7 @@ public class LocationDBhelper extends SQLiteOpenHelper {
 	}
 
 	public LocationDBhelper(Context context, String name) {
-		this(context, name, DEFAULT_VERSION);
+		this(context, name, Constant.DEFAULT_VERSION);
 	}
 
 	@Override

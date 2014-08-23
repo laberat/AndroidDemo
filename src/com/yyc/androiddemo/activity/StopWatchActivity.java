@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.yyc.androiddemo.R;
 import com.yyc.androiddemo.adapter.TimerCountAdapter;
 import com.yyc.androiddemo.bean.TimerCount;
+import com.yyc.androiddemo.dao.TimerDao;
 import com.yyc.androiddemo.util.StringUtil;
 
 public class StopWatchActivity extends Activity {
@@ -22,13 +23,13 @@ public class StopWatchActivity extends Activity {
 	private List<TimerCount> mList;
 	private ListView mListView;
 	private TimerCountAdapter mAdapter;
-	
+
 	private TextView mViewMin;
 	private TextView mViewSec;
 	private TextView mViewCentiSec;
 	private Button mBtnStartOrPause;
 	private Button mBtnResetOrCount;
-	
+
 	private boolean isStartFlag = true;// true表示当前按钮是Start
 	private boolean isResetFlag = true;// true表示当前按钮是Reset
 	private boolean continueFlag = false;// true表示开始被按下，线程开始继续跑
@@ -41,6 +42,8 @@ public class StopWatchActivity extends Activity {
 	private int minute = 0;
 	private int second = 0;
 	private int centiSecond = 0;
+
+	private TimerDao timerDao;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -103,18 +106,21 @@ public class StopWatchActivity extends Activity {
 		mViewCentiSec = (TextView) findViewById(R.id.textview_stopwatch_centisecond);
 		mBtnStartOrPause = (Button) findViewById(R.id.btn_stopwatch_startorpause);
 		mBtnResetOrCount = (Button) findViewById(R.id.btn_stopwatch_resetorcount);
+		timerDao = new TimerDao(this);
 		mList = new ArrayList<TimerCount>();
 		mAdapter = new TimerCountAdapter(this, mList);
 		mListView.setAdapter(mAdapter);
 	}
 
 	private void reset() {
+		readDB();//重置之前test数据库读
 		i = 0;
 		tempmin = 0;
 		tempsec = 0;
 		tempcentisec = 0;
 		count = 0;
 		mAdapter.clear();
+		timerDao.clearTable();
 		mViewMin.setText("00");
 		mViewSec.setText("00");
 		mViewCentiSec.setText("00");
@@ -130,6 +136,17 @@ public class StopWatchActivity extends Activity {
 		tempsec = second;
 		tempcentisec = centiSecond;
 		mAdapter.insert(timerCount);
+		timerDao.insertTimerCount(timerCount);
+	}
+
+	/**
+	 * 测试数据库读
+	 */
+	private void readDB() {
+		List<TimerCount> l = timerDao.getAll();
+		for (int j = 0; j < l.size(); j++) {
+			System.out.println(l.get(j));
+		}
 	}
 
 	private Handler mHandler = new Handler() {
