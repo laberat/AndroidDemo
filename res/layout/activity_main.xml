@@ -23,6 +23,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/btn_main_start_stopwatch"/>
+    <Button 
+        android:id="@+id/btn_main_start_musicplayer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/btn_main_start_musicplayer"/>
     
 </LinearLayout>
 

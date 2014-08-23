@@ -29,6 +29,7 @@
         <activity android:name="com.yyc.androiddemo.activity.LocationListActivity"></activity>
         <activity android:name="com.yyc.androiddemo.activity.BasicAnimationActivity"></activity>
     	<activity android:name="com.yyc.androiddemo.activity.StopWatchActivity"></activity>
+    	<activity android:name="com.yyc.androiddemo.activity.MusicPlayerActivity"></activity>
     </application>
 
 </manifest>

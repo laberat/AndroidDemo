@@ -7,6 +7,7 @@
     <string name="btn_main_start_locationlist">Start Locationlist</string>
     <string name="btn_main_start_basicanim">Start BasicAnim</string>
     <string name="btn_main_start_stopwatch">Start StopWatch</string>
+    <string name="btn_main_start_musicplayer">Start MusicPlayer</string>
     
     <string name="personlist_listitem_name"></string>
     <string name="personlist_listitem_age"></string>

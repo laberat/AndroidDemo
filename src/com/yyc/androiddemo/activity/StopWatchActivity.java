@@ -45,11 +45,18 @@ public class StopWatchActivity extends Activity {
 
 	private TimerDao timerDao;
 
+	private static final int MSG_START = 0x0100;
+	private static final int MSG_TEST = 0x0102;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_stopwatch);
 		initView();
+		initAction();
+	}
+
+	private void initAction() {
 		mBtnStartOrPause.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -92,7 +99,10 @@ public class StopWatchActivity extends Activity {
 						} catch (InterruptedException e) {
 							e.printStackTrace();
 						}
-						mHandler.sendMessage(mHandler.obtainMessage());
+
+						Message msg = mHandler.obtainMessage();
+						msg.what = MSG_START;
+						mHandler.sendMessage(msg);
 					}
 				}
 			}
@@ -113,7 +123,7 @@ public class StopWatchActivity extends Activity {
 	}
 
 	private void reset() {
-		readDB();//重置之前test数据库读
+		readDB();// 重置之前test数据库读
 		i = 0;
 		tempmin = 0;
 		tempsec = 0;
@@ -153,7 +163,15 @@ public class StopWatchActivity extends Activity {
 		@Override
 		public void handleMessage(Message msg) {
 			super.handleMessage(msg);
-			refreshUI();
+			switch (msg.what) {
+				case MSG_START:
+					refreshUI();
+					break;
+				case MSG_TEST:
+					break;
+				default:
+					break;
+			}
 		}
 	};
 
