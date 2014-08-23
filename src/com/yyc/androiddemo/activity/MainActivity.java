@@ -44,7 +44,7 @@ public class MainActivity extends Activity {
 				startActivity(intent);
 			}
 		});
-		
+
 		btnStartBasicAnim = (Button) findViewById(R.id.btn_main_start_basicanim);
 		btnStartBasicAnim.setOnClickListener(new OnClickListener() {
 			@Override
@@ -54,7 +54,7 @@ public class MainActivity extends Activity {
 				startActivity(intent);
 			}
 		});
-		
+
 		btnStartStopWatch = (Button) findViewById(R.id.btn_main_start_stopwatch);
 		btnStartStopWatch.setOnClickListener(new OnClickListener() {
 			@Override

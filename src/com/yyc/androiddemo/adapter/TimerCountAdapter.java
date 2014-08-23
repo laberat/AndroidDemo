@@ -90,7 +90,7 @@ public class TimerCountAdapter extends BaseAdapter {
 
 	public void clear() {
 		this.mList.clear();
-		Log.i("TAG", this.mList.size()+"");
+		Log.i("TAG", this.mList.size() + "");
 		this.notifyDataSetChanged();
 	}
 

@@ -11,8 +11,8 @@ public class MusicPlayerActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_musicplayer);
-		
+
 		MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.fuckyou);
-		mediaPlayer.start(); 
+		mediaPlayer.start();
 	}
 }

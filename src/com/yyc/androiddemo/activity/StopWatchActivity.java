@@ -46,7 +46,6 @@ public class StopWatchActivity extends Activity {
 	private TimerDao timerDao;
 
 	private static final int MSG_START = 0x0100;
-	private static final int MSG_TEST = 0x0102;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -157,37 +156,29 @@ public class StopWatchActivity extends Activity {
 		for (int j = 0; j < l.size(); j++) {
 			System.out.println(l.get(j));
 		}
-	}
+	}// 读数据库也应该尽量放在新线程中避免阻塞UI线程
 
 	private Handler mHandler = new Handler() {
 		@Override
 		public void handleMessage(Message msg) {
 			super.handleMessage(msg);
 			switch (msg.what) {
-				case MSG_START:
-					refreshUI();
-					break;
-				case MSG_TEST:
-					break;
-				default:
-					break;
+			case MSG_START:
+				refreshUI();
+				break;
+			default:
+				break;
 			}
 		}
 	};
 
 	private void refreshUI() {
 		i++;
-		String minStr = "";
-		String secStr = "";
-		String centiSecStr = "";
 		centiSecond = i % 100;
 		second = (i / 100) % 60;
 		minute = i / 6000;
-		minStr = StringUtil.formatUnderTen(minute);
-		secStr = StringUtil.formatUnderTen(second);
-		centiSecStr = StringUtil.formatUnderTen(centiSecond);
-		mViewMin.setText(minStr);
-		mViewSec.setText(secStr);
-		mViewCentiSec.setText(centiSecStr);
+		mViewMin.setText(StringUtil.formatUnderTen(minute));
+		mViewSec.setText(StringUtil.formatUnderTen(second));
+		mViewCentiSec.setText(StringUtil.formatUnderTen(centiSecond));
 	}
 }

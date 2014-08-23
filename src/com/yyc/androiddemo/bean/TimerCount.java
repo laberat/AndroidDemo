@@ -66,8 +66,11 @@ public class TimerCount {
 	}
 
 	public String toString() {
-		return "第" + this.count + "次分时计次——————" + StringUtil.formatUnderTen(this.timerMin) + " : "
-				+ StringUtil.formatUnderTen(this.timerSec) + " : " + StringUtil.formatUnderTen(this.timerCentiSec) + "————  +"+this.timerDiffer;
+		return "第" + this.count + "次分时计次——————"
+				+ StringUtil.formatUnderTen(this.timerMin) + " : "
+				+ StringUtil.formatUnderTen(this.timerSec) + " : "
+				+ StringUtil.formatUnderTen(this.timerCentiSec) + "————  +"
+				+ this.timerDiffer;
 	}
 
 }

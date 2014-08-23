@@ -15,7 +15,7 @@ import android.util.Log;
 public class LocationDao {
 	private LocationDBhelper mHelper;
 	private Context mContext;
-	
+
 	public LocationDao(Context context) {
 		this.mContext = context;
 		this.mHelper = new LocationDBhelper(mContext, Constant.DB_NAME);

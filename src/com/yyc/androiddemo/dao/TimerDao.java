@@ -34,11 +34,11 @@ public class TimerDao {
 		Log.i("TimerDao_tag", "the new record id is : " + id);
 		return id;
 	}
-	
-	public void clearTable(){
+
+	public void clearTable() {
 		SQLiteDatabase db = this.mHelper.getWritableDatabase();
 		int i = db.delete(TimerDBHelper.TABLE_NAME, null, null);
-		System.out.println("删除了 "+i+"行");
+		System.out.println("删除了 " + i + "行");
 	}
 
 	public List<TimerCount> getAll() {
