@@ -24,7 +24,7 @@
             android:layout_height="120dp"
             android:contentDescription="@string/app_name"
             android:scaleType="fitXY"
-            android:src="@drawable/imageview_default" />
+            android:src="@drawable/demo_default" />
 
         <TextView
             android:id="@+id/textview_locationlist_listitem_description"

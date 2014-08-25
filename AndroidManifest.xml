@@ -30,6 +30,8 @@
         <activity android:name="com.yyc.androiddemo.activity.BasicAnimationActivity"></activity>
     	<activity android:name="com.yyc.androiddemo.activity.StopWatchActivity"></activity>
     	<activity android:name="com.yyc.androiddemo.activity.MusicPlayerActivity"></activity>
+    	
+    	<service android:name="com.yyc.androiddemo.service.PlayMusicService"></service>
     </application>
 
 </manifest>

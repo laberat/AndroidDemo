@@ -4,8 +4,48 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
     
-	<TextView 
-	    android:layout_width="wrap_content"
+	<Button
+	    android:id="@+id/btn_musicplayer_startservice" 
+	    android:layout_width="match_parent"
 	    android:layout_height="wrap_content"
-	    android:text="hello"/>
+	    android:text="@string/btn_musicplayer_startservice"/>
+	<Button
+	    android:id="@+id/btn_musicplayer_stopservice" 
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:text="@string/btn_musicplayer_stopservice"/>
+	
+	<SeekBar 
+	    android:id="@+id/seekbar_musicplayer"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_gravity="center"/>
+	
+	<LinearLayout 
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:gravity="center"
+	    android:orientation="horizontal">
+	    
+	    <ImageButton
+	        android:id="@+id/btn_musicplayer_playorpause"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:src="@drawable/musicplayer_play"/>
+	    <ImageButton
+	        android:id="@+id/btn_musicplayer_stop"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:src="@drawable/musicplayer_stop"/>
+	    <ImageButton
+	        android:id="@+id/btn_musicplayer_previous"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:src="@drawable/musicplayer_previous"/>
+	    <ImageButton
+	        android:id="@+id/btn_musicplayer_next"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:src="@drawable/musicplayer_next"/>
+	</LinearLayout>
 </LinearLayout>

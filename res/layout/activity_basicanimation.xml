@@ -12,7 +12,7 @@
 	    android:layout_marginTop="20dp"
 	    android:contentDescription="@string/app_name"
 	    android:scaleType="fitXY"
-	    android:src="@drawable/imageview_basicanim_display"
+	    android:src="@drawable/basicanim_display"
 	    />
 	<LinearLayout 
 	    android:layout_width="match_parent"
