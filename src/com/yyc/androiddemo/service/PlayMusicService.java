@@ -1,13 +1,17 @@
 package com.yyc.androiddemo.service;
 
-import com.yyc.androiddemo.R;
-import com.yyc.androiddemo.activity.MusicPlayerActivity;
+import java.io.File;
+import java.io.IOException;
 
 import android.app.Service;
 import android.content.Intent;
 import android.media.MediaPlayer;
+import android.os.Environment;
 import android.os.IBinder;
 import android.util.Log;
+
+import com.yyc.androiddemo.R;
+import com.yyc.androiddemo.activity.MusicPlayerActivity;
 
 public class PlayMusicService extends Service {
 	public static MediaPlayer player;
@@ -30,8 +34,29 @@ public class PlayMusicService extends Service {
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {
 		Log.i(TAG, "here onStartCommand is called");
+		String songURI = Environment.getExternalStorageDirectory()
+				+ File.separator + "Music" + File.separator;
+
 		int value = intent.getIntExtra("operate", 0);
 		switch (value) {
+		case 0x1010:
+			songURI += intent.getStringExtra("URI");
+			try {
+				player.reset();
+				player.setDataSource(songURI);
+				player.prepare();
+				player.start();
+			} catch (IllegalArgumentException e) {
+				e.printStackTrace();
+			} catch (SecurityException e) {
+				e.printStackTrace();
+			} catch (IllegalStateException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+
+			break;
 		case 0x0100:// 播放按钮发送的intent
 			play();
 			break;
@@ -68,12 +93,10 @@ public class PlayMusicService extends Service {
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
-					Log.i(TAG, "当前 Progress："+currentPosition);
 					MusicPlayerActivity.mSeekBar.setProgress(currentPosition);
 				}
 			}
 		}).start();
-
 		return super.onStartCommand(intent, flags, startId);
 	}
 

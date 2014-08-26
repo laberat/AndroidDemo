@@ -28,7 +28,7 @@
     <string name="btn_stopwatch_reset">重置</string>
     <string name="btn_stopwatch_count">计次</string>
     
-    <string name="btn_musicplayer_startservice">开始播放</string>
-    <string name="btn_musicplayer_stopservice">停止播放</string>
+    <string name="btn_musicplayer_startservice">启动服务</string>
+    <string name="btn_musicplayer_stopservice">停止服务</string>
 
 </resources>

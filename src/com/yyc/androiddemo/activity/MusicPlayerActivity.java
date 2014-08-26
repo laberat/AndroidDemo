@@ -1,35 +1,49 @@
 package com.yyc.androiddemo.activity;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ListView;
 import android.widget.SeekBar;
+import android.widget.SimpleAdapter;
 
 import com.yyc.androiddemo.R;
 import com.yyc.androiddemo.service.PlayMusicService;
+import com.yyc.androiddemo.util.FileIOUtil;
 
 public class MusicPlayerActivity extends Activity {
 
+	public static SeekBar mSeekBar;
+
 	private Button btnStart;
 	private Button btnStop;
-
 	private ImageButton iBtnPlayorPause;
 	private ImageButton iBtnStop;
 	private ImageButton iBtnNext;
 	private ImageButton iBtnPrevious;
-	public static SeekBar mSeekBar;
-	private boolean isPlay = true;// true表示当前按钮是play
 
-	private Intent mIntent;
 	private final int INTENT_PLAY = 0x0100;
 	private final int INTENT_PAUSE = 0x0101;
 	private final int INTENT_NEXT = 0x0102;
 	private final int INTENT_PREVIOUS = 0x0103;
 	private final int INTENT_STOP = 0x0104;
+
+	private boolean isPlay = true;// true表示当前按钮是play
+	private Intent mIntent;
+
+	private List<String> mList;
+	private ListView mListView;
+	private SimpleAdapter mAdapter;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -37,11 +51,29 @@ public class MusicPlayerActivity extends Activity {
 		setContentView(R.layout.activity_musicplayer);
 		mIntent = new Intent();
 		mIntent.setClass(MusicPlayerActivity.this, PlayMusicService.class);
-
 		initView();
 	}
 
 	private void initView() {
+		mListView = (ListView) findViewById(R.id.listview_musicplayer);
+		initAdapter();
+		mListView.setAdapter(mAdapter);
+		mListView.setOnItemClickListener(new OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				//当item被单击之后，停止当前player，加载该item对于的uri的song
+				mIntent.putExtra("operate", 0x1010);//item单击事件
+				mIntent.putExtra("URI", MusicPlayerActivity.this.mList.get(position));
+				startService(mIntent);
+			}
+			
+		});
+		
+		
+		
+		
+		// 启动服务按钮
 		btnStart = (Button) findViewById(R.id.btn_musicplayer_startservice);
 		btnStart.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -49,7 +81,7 @@ public class MusicPlayerActivity extends Activity {
 				startService(mIntent);
 			}
 		});
-
+		// 停止服务按钮
 		btnStop = (Button) findViewById(R.id.btn_musicplayer_stopservice);
 		btnStop.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -58,7 +90,7 @@ public class MusicPlayerActivity extends Activity {
 				stopService(mIntent);
 			}
 		});
-
+		// 播放、暂停按钮
 		iBtnPlayorPause = (ImageButton) findViewById(R.id.btn_musicplayer_playorpause);
 		iBtnPlayorPause.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -83,7 +115,7 @@ public class MusicPlayerActivity extends Activity {
 				}
 			}
 		});
-
+		// 停止播放按钮
 		iBtnStop = (ImageButton) findViewById(R.id.btn_musicplayer_stop);
 		iBtnStop.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -96,7 +128,7 @@ public class MusicPlayerActivity extends Activity {
 				startService(mIntent);
 			}
 		});
-
+		// 下一曲按钮
 		iBtnNext = (ImageButton) findViewById(R.id.btn_musicplayer_next);
 		iBtnNext.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -106,7 +138,7 @@ public class MusicPlayerActivity extends Activity {
 				startService(mIntent);
 			}
 		});
-
+		// 上一曲按钮
 		iBtnPrevious = (ImageButton) findViewById(R.id.btn_musicplayer_previous);
 		iBtnPrevious.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -116,32 +148,40 @@ public class MusicPlayerActivity extends Activity {
 				startService(mIntent);
 			}
 		});
-		
+		// 歌曲播放进度条
 		mSeekBar = (SeekBar) findViewById(R.id.seekbar_musicplayer);
 		mSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
 			@Override
 			public void onStopTrackingTouch(SeekBar seekBar) {
-				//nothing to do
+				// nothing to do
 			}
-			
+
 			@Override
 			public void onStartTrackingTouch(SeekBar seekBar) {
-				//nothing to do 
+				// nothing to do
 			}
-			
+
 			@Override
 			public void onProgressChanged(SeekBar seekBar, int progress,
 					boolean fromUser) {
 				if (fromUser) {
 					PlayMusicService.player.seekTo(progress);
-					Log.i("TAG", "progress is "+progress);
+					Log.i("TAG", "progress is " + progress);
 				}
 			}
 		});
-		if (PlayMusicService.player != null) {
-			mSeekBar.setMax(PlayMusicService.player.getDuration());
-			mSeekBar.setProgress(PlayMusicService.player.getCurrentPosition());
-		}
+	}
 
+	private void initAdapter() {
+		mList = FileIOUtil.readFileList("Music");
+		List<HashMap<String, Object>> maps = new ArrayList<HashMap<String, Object>>();
+		for (int i = 0; i < mList.size(); i++) {
+			HashMap<String, Object> map = new HashMap<String, Object>();
+			map.put("key", mList.get(i));
+			maps.add(map);
+		}
+		mAdapter = new SimpleAdapter(this, maps, R.layout.listitem_musicplayer,
+				new String[] { "key" },
+				new int[] { R.id.textview_musicplayer_listitem_songname });
 	}
 }

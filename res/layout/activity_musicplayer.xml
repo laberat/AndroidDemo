@@ -48,4 +48,13 @@
 	        android:layout_height="wrap_content"
 	        android:src="@drawable/musicplayer_next"/>
 	</LinearLayout>
+	
+	<ListView 
+	    android:id="@+id/listview_musicplayer"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:divider="@android:color/white"
+	    android:dividerHeight="2dp"
+	    android:background="@android:color/darker_gray"
+	    />
 </LinearLayout>
