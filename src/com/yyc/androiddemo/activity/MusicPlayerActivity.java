@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.SeekBar;
 
 import com.yyc.androiddemo.R;
 import com.yyc.androiddemo.service.PlayMusicService;
@@ -20,6 +21,7 @@ public class MusicPlayerActivity extends Activity {
 	private ImageButton iBtnStop;
 	private ImageButton iBtnNext;
 	private ImageButton iBtnPrevious;
+	public static SeekBar mSeekBar;
 	private boolean isPlay = true;// true表示当前按钮是play
 
 	private Intent mIntent;
@@ -114,6 +116,32 @@ public class MusicPlayerActivity extends Activity {
 				startService(mIntent);
 			}
 		});
+		
+		mSeekBar = (SeekBar) findViewById(R.id.seekbar_musicplayer);
+		mSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+			@Override
+			public void onStopTrackingTouch(SeekBar seekBar) {
+				//nothing to do
+			}
+			
+			@Override
+			public void onStartTrackingTouch(SeekBar seekBar) {
+				//nothing to do 
+			}
+			
+			@Override
+			public void onProgressChanged(SeekBar seekBar, int progress,
+					boolean fromUser) {
+				if (fromUser) {
+					PlayMusicService.player.seekTo(progress);
+					Log.i("TAG", "progress is "+progress);
+				}
+			}
+		});
+		if (PlayMusicService.player != null) {
+			mSeekBar.setMax(PlayMusicService.player.getDuration());
+			mSeekBar.setProgress(PlayMusicService.player.getCurrentPosition());
+		}
 
 	}
 }
